@@ -1,0 +1,12 @@
+from bs4 import BeautifulSoup
+import requests
+import time
+
+URL = "https://en.wikipedia.org/wiki/Donald_Trump"
+html_text = requests.get(URL).content
+
+soup = BeautifulSoup(html_text,  "html.parser")
+card = soup.find('table', class_="infobox vcard")
+full_names = card.find_all('td', class_="infobox-data")
+for full_name in full_names:
+    print(full_name.prettify())
